@@ -1,0 +1,54 @@
+<section class="mx-2 my-2">
+  <h3 class="text-color">Selected items</h3>
+  <div *ngIf="!isEmptyCart(); else emptyCart">
+    <div *ngFor="let item of selectedItemList">
+      <div class="item" *ngIf="item.count">
+      <div class="d-flex flex-md-row flex-column w-100">
+        <div class="d-flex">
+          <img src="{{imgURL +item.imageURL +'/'+ item.name}}.jpg" alt="" width="72">
+          <div class="d-flex flex-column ps-2">
+            <span class="text-main">{{item.name}} {{'('+item.weight+')'}}</span>
+            <p class="card-text">
+              <span style="font-size: 12px; font-weight: 400;">{{item.count}} &times; &#8377; {{item.newPrice}} </span>
+            </p>
+          </div>
+        </div>
+        <div class="ms-md-auto my-md-auto me-2 d-flex">
+          <div class="">
+            <section class="d-flex align-items-center">
+              <button type="button" class="btn btn-outline-primary btn-outline-bg br-50" (click)="removeOne(item)">
+                <i class="fa fa-minus"></i>
+              </button>
+              <span class="mx-2">{{item.count}} </span>
+              <button type="button" class="btn btn-outline-primary btn-outline-bg br-50" (click)="addOne(item)"
+                [disabled]="item.count === 5">
+                <i class="fa fa-plus"></i>
+              </button>
+            </section>
+          </div>
+          <div class="subTotal ms-auto me-2 mx-md-2 my-auto">
+            <div class="d-flex flex-column">
+              <span class="newPrice">Rs. {{(item.count * (item.newPrice * 100))/100 | number:'1.2-2' }}</span>
+              <span class="text-color oldPrice">Saved Rs.{{getSavedPrice(item) | number:'1.2-2' }} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <br>
+    <div class="payment">
+    <!-- <app-checkout-bar [isCartPage]="true"></app-checkout-bar> -->
+      <div class="bar d-flex justify-content-center">
+        <button type="button" class="btn btn-primary btn-bg my-3" (click)="navigateToPayment()">Select Address and Pay</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #emptyCart>
+    <div class="d-flex flex-column text-color justify-content-center align-items-center my-5">
+      <span><i class="fa fa-cart-plus fa-5x"></i></span>
+      <span class="text-color">Your cart is empty! <a href="/#/all" class="cursor-pointer">click here</a> to add
+        items.</span>
+    </div>
+  </ng-template>
+</section>

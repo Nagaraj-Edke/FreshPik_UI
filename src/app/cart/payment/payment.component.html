@@ -1,0 +1,31 @@
+<div class="payment mx-auto">
+  <p class=""><a class="cursor-pointer text-color" (click)="navigate('cart')"><i class="fa fa-arrow-left"></i> Back</a></p>
+  <div *ngFor="let item of selectedItemList">
+    <div class="item row my-2" *ngIf="item.count">
+      <span class="col-12">{{item.name}} {{'('+item.weight+')'}}</span>
+      <span  class="col-6" style="font-size: 12px; font-weight: 400;">
+        {{item.count}} &times; &#8377; <span class="oldPrice">{{item.oldPrice | number:'1.2-2'}} </span>
+        <span class="newPrice">{{item.newPrice | number:'1.2-2'}} </span>
+      </span>
+      <span class="col-6">
+      <div class="d-flex justify-content-end pe-2">
+        <span class="oldPrice">&#8377; {{(item.count * (item.oldPrice * 100))/100  | number:'1.2-2' }}</span>
+        <span class="newPrice">&nbsp;&#8377; {{(item.count * (item.newPrice * 100))/100 | number:'1.2-2' }}</span>
+      </div>
+    </span>
+    </div>
+  </div>
+  <hr>
+  <section class="flexSpaceBetween" >
+    <span class="ms-2">Total</span>
+    <div class="d-flex flex-column align-items-end pe-2">
+      <span class="newPrice">&#8377; {{totalAmount | number:'1.2-2'}}</span>
+      <span class="text-color" style="font-size: 12px;">Saved &#8377; {{savedAmount | number:'1.2-2'}}</span>
+    </div>
+  </section>
+
+  <hr>
+  <section class="pay">
+    <button [disabled]="isPaymentProgress" type="button" class="btn btn-primary btn-bg" (click)="openDialog()">Pay  &#8377; {{totalAmount | number:'1.2-2'}} </button>
+  </section>
+</div>

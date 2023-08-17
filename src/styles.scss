@@ -1,1 +1,89 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root{
+  --color: #79995A;
+}
+.btn-bg {
+  background-color: var(--color) !important;
+  border: var(--color);
+
+  &:hover {
+    background-color: #547634 !important;
+    border: #547634;
+  }
+
+  &:active {
+    background-color: var(--color) !important;
+    border: var(--color) Im !important;
+  }
+}
+
+.btn-outline-bg {
+  color: var(--color);
+  border-color: var(--color);
+  &:hover{
+    background-color: #547634;
+    box-shadow: 0 0 5px #547634;
+    border-color: #547634;
+  }
+  &:active {
+    background-color: var(--color) !important;
+    border-color: var(--color) !important;
+  }
+  &:disabled {
+    color: grey;
+    border-color: grey;
+  }
+  &:focus-visible {
+    background-color: #547634;
+    border-color: #547634;
+    box-shadow: 0 0 5px #547634;
+  }
+}
+
+.text-color {
+  color: #79995A !important;
+}
+
+.header2 {
+  font-weight: 600;
+  font-size: large;
+}
+::ng-deep {
+  mat-checkbox{
+    .mdc-form-field {
+      .mdc-checkbox__background{
+        background-color: #79995A !important;
+        border-color: #79995A !important;
+      }
+    }
+  }
+  mat-expansion-panel.mat-expansion-panel:not([class*="mat-elevation-z"]){
+    box-shadow: none !important;
+    background: #d5e5f0 !important;
+  }
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: black !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.font-14 {
+  font-size: 14px !important;
+}
+.font-12 {
+  font-size: 12px !important;
+}
+
+.backDrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  cursor: not-allowed;
+}

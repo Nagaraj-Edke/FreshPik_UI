@@ -1,0 +1,29 @@
+<div class="card m-1">
+  <img src="{{imgURL +veg.imageURL +'/'+ veg.name}}.jpg" class="card-img-top" alt="apple">
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title mt-auto">{{veg.name | capitalizeFirstLetter}}</h5>
+    <p class="card-text">
+      <span class="newPrice">&#8377; {{veg.newPrice | number:'1.2-2'}} </span>
+      <span class="oldPrice">&#8377; {{veg.oldPrice | number:'1.2-2'}}</span><br>
+      <span style="font-size: 10px; font-weight: 500;">per {{veg.weight}}</span>
+    </p>
+
+    <div class="d-flex">
+      <button *ngIf="!veg.count; else cart" type="button" class="btn btn-outline-primary btn-outline-bg add w-100"
+        (click)="addToCart()">
+        Add <i class="fa fa-cart-plus"></i></button>
+
+      <ng-template #cart>
+        <div class="update w-100 d-flex">
+          <i class="fa fa-minus ms-2" (click)="deleteOne()"></i>
+          <span class="countParent">
+            <i class="fa fa-cart-arrow-down"></i>
+            <span class="count">{{veg.count || 0}}</span>
+          </span>
+          <i class="fa fa-plus me-2" (click)="addToCart()" [ngStyle]="{'color': veg.count === 5 ? 'grey' : '#fff'}"></i>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+</div>

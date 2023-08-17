@@ -1,0 +1,22 @@
+.bar{
+  width: 95%;
+  border: 1px solid #79995A;
+  color: #79995A;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 8px 20px;
+  align-items: center;;
+  justify-content: space-between;
+}
+
+.fixed{
+  position: fixed;
+  bottom: 5px;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .fixed {
+    max-width: calc(100% - 250px);
+  }
+}

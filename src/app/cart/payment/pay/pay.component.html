@@ -1,0 +1,116 @@
+<section style="cursor: auto;" *ngIf="!paymentStatus">
+  <h1 mat-dialog-title class="text-color">{{paymentPage ? 'Pay &#8377;'+ Price : 'Selet Delivery Address'}} <span
+      class="close ms-auto" (click)="close()">X</span> </h1>
+  <div mat-dialog-content>
+    <section *ngIf="!paymentPage; else paymentPageSection">
+      <div *ngIf="addresses.length; else addAddress">
+        <div class="" *ngFor="let address of addresses; let i=index">
+          <input type="radio" name="address" id="address{{i}}" (click)="onSelectAddress(address)" [checked]="address.id === selectedAddress?.id">
+          <span>&nbsp; {{address?.Hno}}, {{address?.street}}, {{address?.town}} - {{address.pincode}}</span>&nbsp;&nbsp;
+          <i class="fa fa-edit cursor-pointer" (click)="edit(address)"></i>
+          <i class="fa fa-trash-o cursor-pointer mx-1" (click)="remove(address.id)"></i>
+        </div>
+        <button type="button" class="my-1" mat-raised-button *ngIf="!addNewAddress" (click)="AddNewAddress()">+
+          Add</button>
+        <ng-container *ngIf="addNewAddress" [ngTemplateOutlet]="addAddress"></ng-container>
+      </div>
+
+      <ng-template #addAddress>
+        <h5 class="mt-2">{{updateAddress ? 'Update ': 'Add'}} Address</h5>
+        <form [formGroup]="newAddressFrom" (ngSubmit)="formSubmit()">
+          <div class="form-group">
+            <label>Hno/Flat No:</label>
+            <input type="text" class="form-control w-100" formControlName="Hno">
+            <span [ngClass]="isInvalid('Hno') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span>
+          </div>
+          <div class="form-group">
+            <label>Street: </label>
+            <input type="text" class="form-control w-100" formControlName="street">
+            <span [ngClass]="isInvalid('street') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span>
+
+          </div>
+          <div class="form-group">
+            <label>City/Town:</label>
+            <input type="text" class="form-control w-100" formControlName="town">
+            <span [ngClass]="isInvalid('town') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span>
+          </div>
+          <div class="form-group">
+            <label>Pincode: </label>
+            <input type="number" class="form-control w-100" formControlName="pincode">
+            <span [ngClass]="isInvalid('pincode') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span>
+          </div>
+          <div class="d-flex flex-row-reverse">
+
+            <button type="submit" class="btn btn-primary btn-bg my-1">{{updateAddress ? 'Update ': 'Add'}} Address</button>
+            <button type="button" *ngIf="addresses.length" class="btn btn-outline-primary btn-outline-bg my-1 mx-2"
+              (click)="addNewAddress = false">Close</button>
+          </div>
+        </form>
+      </ng-template>
+    </section>
+    <ng-template #paymentPageSection>
+      <div>
+        <span class="font-14">Delivery Address:
+          <span class="font-12">&nbsp;
+            {{selectedAddress?.Hno}}, {{selectedAddress?.street}}, {{selectedAddress?.town}} -
+            {{selectedAddress.pincode}}
+          </span>
+        </span>
+        <br>
+        <a (click)="paymentPage = false;" style="cursor: pointer;">change address</a>
+      </div>
+
+    </ng-template>
+  </div>
+
+  <div mat-dialog-actions class="d-flex" *ngIf="paymentPage">
+
+    <button class="btn btn-primary btn-bg" (click)="PaymentSuccess()">Payment Success</button>
+    <button class="btn btn-danger ms-auto" (click)="PaymentFailure()">Payment Failed</button>
+
+  </div>
+
+
+  <div mat-dialog-actions class="d-flex" *ngIf="!paymentPage">
+    <button class="btn btn-primary btn-bg ms-auto px-4 me-2" *ngIf="!addNewAddress" [disabled]="!selectedAddress"
+      (click)="next()">Next</button>
+  </div>
+</section>
+
+<section *ngIf="paymentStatus">
+  <section *ngIf="paymentStatus === 'Success'; else FailureSection">
+    <h1 mat-dialog-title class="text-color font-14"> Payment Success</h1>
+    <section mat-dialog-content class="font-12">
+      <span>🎉 Payment Successful! 🎉</span>
+      <div>Thank you for your order! Your payment has been successfully processed, and we're excited to fulfill your items. 🛍️</div>
+      <span>Delivery Address <br>&nbsp; Hno/Flat no: {{selectedAddress?.Hno}}, {{selectedAddress?.street}}, {{selectedAddress?.town}} - {{selectedAddress.pincode}}</span>
+
+    </section>
+    <section mat-dialog-actions class="d-flex">
+    <button class="btn btn-primary btn-bg ms-auto me-2" (click)="close()">Close</button>
+
+    </section>
+  </section>
+  <ng-template #FailureSection>
+    <h1 mat-dialog-title class="invalidText font-14"> Payment Failed</h1>
+    <section mat-dialog-content class="font-12">
+      <span>⚠️ Payment Unsuccessful ⚠️</span>
+      <div>
+        <p> We're sorry to inform you that the payment for your order could not be processed at this time. We understand
+          that this might be disappointing, and we apologize for any inconvenience caused.
+        </p>
+        <span>Possible reasons for payment failure:</span>
+        <ul>
+          <li>Insufficient funds in your account</li>
+          <li>Incorrect payment details provided</li>
+          <li>Payment authorization issues</li>
+        </ul>
+      </div>
+    </section>
+    <section mat-dialog-actions class="d-flex flex-row-reverse">
+    <button class="btn btn-primary btn-bg mx-2" (click)="paymentRetry()">Retry</button>
+    <button class="btn btn-outline-primary btn-outline-bg ms-auto" (click)="close()">Close</button>
+    </section>
+  </ng-template>
+
+</section>

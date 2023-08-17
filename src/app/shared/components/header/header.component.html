@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand bgg header-sticky">
+  <div class="container-fluid">
+    <a class="navbar-brand" (click)="navigate('/')">
+      <img class="title" src="assets/images/title.png" alt="" srcset="" width="128" height="48">
+    </a>
+    <div class="navbar-collapse">
+      <ul class="navbar-nav me-md-5 mb-2 mb-lg-0">
+        <li class="nav-item d-none d-md-block cursor-pointer">
+          <a class="nav-link active" aria-current="page" (click)="navigate('/')">Home</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link" (click)="navigate('/all')">shop</a>
+        </li>
+      </ul>
+      <form class="d-sm-flex d-none me-auto " role="search" id="searchForm" *ngIf="showSearchBar">
+        <input #input1 class="form-control" type="search" placeholder="Search" aria-label="Search" (keyup.enter)="onSearch(input1.value)">
+        <button class="btn btn-success" type="button" id="search">
+          <img src="assets/images/search.png" alt="" srcset="" width="28">
+        </button>
+      </form>
+      <div class="d-sm-none searchBox"  *ngIf="showSearchBar">
+        <div class="search" style="color: #fff;" (click)="searchBarExpand()"><i class="fa fa-search"></i></div>
+        <input [(ngModel)]="search"  #input class="form-control searchInput" type="search" placeholder="Search" aria-label="Search"  (search)="onSearch(search)">
+        <div class="close pe-1" style="color: #fff;" (click)="searchBarCollapse()"><i class="fa fa-close"></i></div>
+      </div>
+      <div id="cart" class="me-2 ms-auto cursor-pointer" (click)="navigate('/cart')">
+        <img src="assets/images/cart.png" alt="" srcset="" width="48" height="48">
+        <span class="notify" *ngIf="cartCount">{{cartCount}}</span>
+      </div>
+      <div id="userIcon" class="cursor-pointer text-color mx-2" [matMenuTriggerFor]="menu">
+        <i class="fa fa-user-circle-o fa-2x"></i>
+      </div>
+      <mat-menu #menu="matMenu" panelClass="z-index">
+        <button *ngIf="!isLoggedIn" mat-menu-item (click)="navigate('/login')">
+          <span>Login/Signup</span>
+        </button>
+        <p *ngIf="isLoggedIn" mat-menu-item>
+          <span>{{name}}</span>
+        </p>
+      </mat-menu>
+    </div>
+  </div>
+</nav>

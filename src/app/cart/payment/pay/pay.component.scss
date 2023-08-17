@@ -1,0 +1,33 @@
+
+.form-control:focus, .form-control:focus-visible {
+  outline: none;
+  border-color: #79995acc;
+  box-shadow: 0 0 5px #79995a9e;
+}
+
+.fa-trash-o {
+  color: #dc3545;
+}
+.invalidText {
+  visibility: visible;
+  color: #dc3545;
+  font-size: 12px;
+  margin-left: 5px;
+}
+.hidden {
+  visibility: hidden;
+}
+input {
+  cursor: pointer;
+}
+
+.close {
+  color: black;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+[mat-dialog-title] {
+  display: flex;
+  padding-top: 15px
+}

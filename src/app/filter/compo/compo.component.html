@@ -1,0 +1,35 @@
+<mat-drawer-container class="" >
+  <mat-drawer #drawer class="example-sidenav" [mode]="mode" [(opened)]="filterSidebar">
+    <div class="h-100 d-flex flex-column">
+      <p style="font-weight:500;">Filters</p>
+      <div>
+        <mat-expansion-panel expanded="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Category</mat-panel-title>
+          </mat-expansion-panel-header>
+          <section class="example-section" id="type">
+
+            <mat-checkbox class="example-margin" [(ngModel)]="vegCheckbox" (change)="change()">Vegitables</mat-checkbox>
+            <mat-checkbox class="example-margin" [(ngModel)]="fruitsCheckbox" (change)="change()">Fruits</mat-checkbox>
+          </section>
+
+        </mat-expansion-panel>
+      </div>
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content class=""> <!--overflowY-n-->
+  <div class="sml-2">
+    <div class="sticky w-100 filter">
+      <div class="w-100">
+        <a (click)="filterSidebar=true;">Filters</a>
+      </div>
+    </div>
+    <div class="example-sidenav-content container-lg" style="margin-bottom: 60px;">
+      <div class="d-flex flex-wrap" style="justify-content: space-around;">
+        <app-card *ngFor="let veg of data; let i = index" [veg]="veg" class="my-1" [ngClass]="{'me-auto':i==data.length-1}"></app-card>
+      </div>
+    </div>
+    <app-checkout-bar [isCartPage] = "false"></app-checkout-bar>
+  </div></mat-drawer-content>
+</mat-drawer-container>

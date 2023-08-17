@@ -1,0 +1,60 @@
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+      aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+      aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+      aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item" *ngFor="let img of carousel; let i=index" [ngClass]="{'active' : i==0}">
+      <img src="assets/images/{{img.url}}" class="d-block w-100" alt="{{img.name}}" (click)="navigateToAll(img.type)">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="ms-3 mt-3">
+  <h3 class="text-color ms-1">Fresh Vegitables</h3>
+  <div class="d-flex cards pb-4">
+    <div *ngFor="let veg of vegData">
+      <app-card [veg]="veg"></app-card>
+    </div>
+    <div class="more" style="min-width: 10rem;">
+      <div class="d-flex align-items-center" (click)="navigateToAll('vegitables')">
+        <span class="header2 me-2">more</span>
+        <button class="btn btn-primary btn-bg" style="border-radius: 50%;">
+          <span><i class="fa fa-arrow-right"></i></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="ms-3 mt-3">
+  <h3 class="text-color ms-1">Fresh Fruits</h3>
+  <div class="d-flex cards pb-4">
+    <app-card *ngFor="let veg of fruits" [veg]="veg"></app-card>
+    <div class="more" style="min-width: 10rem;">
+      <div class="d-flex align-items-center" (click)="navigateToAll('fruits')">
+        <span class="header2 me-2">more</span>
+        <button class="btn btn-primary btn-bg" style="border-radius: 50%;">
+          <span><i class="fa fa-arrow-right"></i></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-checkout-bar></app-checkout-bar> -->

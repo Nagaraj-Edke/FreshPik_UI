@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 75px);
+  perspective: 1000px;
+}
+
+.form {
+  margin: 20px;
+  position: absolute;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+  transform-origin: center;
+}
+
+.form h2 {
+  margin-top: 0;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  color: #444;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login-form {
+  background-color: #f8f9fa;
+  transform: rotateY(0);
+}
+
+.signup-form {
+  background-color: #f0f8ff;
+  max-width: 800px;
+  transform: rotateY(-180deg);
+}
+
+@media only screen and (min-width: 768px) {
+  .signup-form{
+    width: calc(100vw - 10%);
+  }
+}
+
+.form input:focus, .form button:focus-visible {
+  outline: none;
+  border-color: #79995acc;
+  box-shadow: 0 0 5px #79995a9e;
+}
+
+.form button {
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.form button:hover {
+  transform: scale(1.05);
+}
+
+.form button:active {
+  transform: scale(0.95);
+}
+
+
+.form-container {
+  display: flex;
+  transition: transform 0.5s;
+}
+
+.form.active {
+  transform: rotateY(0);
+}
+
+.imp::after {
+  content: "*";
+  color: red;
+}
+.invalid {
+  border-color: #dc3545 !important;
+}
+.invalidText {
+  color: #dc3545;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+::ng-deep {
+  .mat-mdc-menu-content {
+    // min-width: 300px;
+    padding-right: 5px;
+  }
+}

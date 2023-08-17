@@ -1,0 +1,10 @@
+<div class="container mt-3 fixed" *ngIf="count">
+  <div class="bar d-flex">
+    <span class="d-flex align-items-center">
+      <i class="fa fa-cart-arrow-down fa-2x"></i>
+      <span class="ms-2">You added {{count}} item{{count === 1 ? '.':'s.'}}</span>
+    </span>
+    <button *ngIf="!isCartPage" type="button" class="btn btn-primary btn-bg" (click)="checkoutToCart()">View Cart</button>
+    <button *ngIf="isCartPage" type="button" class="btn btn-primary btn-bg" (click)="checkoutPayment()">Select Address and Pay</button>
+  </div>
+</div>

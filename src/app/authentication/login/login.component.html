@@ -1,0 +1,90 @@
+<div style="position: relative;">
+<div class="container">
+
+  <div class="form login-form" [ngClass]="{'active': showLoginForm}" [@formAnimation]="showLoginForm ? 'login' : 'signup'">
+    <h2 class="text-color">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+      <div class="form-group">
+
+        <label class="text-color imp" for="loginUsername">Username</label>
+        <input type="email" id="loginUsername" formControlName="loginUsername" class="form-control" [ngClass]="{'invalid': isInvalid('loginUsername')}" required>
+        <span class="invalidText" *ngIf="isInvalid('loginUsername') && !loginForm.get('loginUsername')?.hasError('customError')">Enter valid email</span>
+        <span class="invalidText" *ngIf="loginForm.get('loginUsername')?.hasError('customError')">Username not exists.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="text-color imp" for="loginPassword">Password  <i class="fa fa-question-circle-o" [matMenuTriggerFor]="menu"></i></label>
+        <div class="d-flex" style="position: relative;align-items: center;">
+          <input [type]="showPassword ? 'text':'password'" id="loginPassword" formControlName="loginPassword" class="form-control" [ngClass]="{'invalid': isInvalid('loginPassword')}" minlength="8" required>
+          <i class="text-color fa fa-eye" style="position: absolute; right: 5px;" *ngIf="showPassword" (click)="showPassword = false"></i>
+          <i class="text-color fa fa-eye-slash" style="position: absolute; right: 5px;" *ngIf="!showPassword" (click)="showPassword = true"></i>
+        </div>
+        <span class="invalidText" *ngIf="isInvalid('loginPassword') && !loginForm.get('loginPassword')?.hasError('customError')">Enter valid password</span>
+        <span class="invalidText" *ngIf="loginForm.get('loginPassword')?.hasError('customError')"> Incorrect password</span>
+      </div>
+
+      <div class="d-flex justify-content-space-between" style="justify-content: space-between; align-items: center;">
+        
+        <button type="submit" class="btn btn-primary btn-bg" >Login</button>
+        <a (click)="toggleForms()">Sign Up</a>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="form signup-form" [ngClass]="{'active': !showLoginForm}" [@formAnimation]="!showLoginForm ? 'login' : 'signup'">
+    <h2 class="text-color">Sign Up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSignUpSubmit()">
+      <div class="row">
+        <div class="form-group col-12 col-md-6">
+          <label class="text-color imp" for="firstname">FirstName</label>
+          <input type="text" id="firstname" formControlName="firstname" class="form-control" [ngClass]="{'invalid': isInvalidSignUp('firstname')}" required>
+          <span class="invalidText" *ngIf="isInvalidSignUp('firstname')">Enter first name</span>
+        </div>
+
+        <div class="form-group col-12 col-md-6">
+          <label class="text-color imp" for="lastname">Last Name</label>
+          <input type="text" id="lastname" formControlName="lastname" class="form-control" [ngClass]="{'invalid': isInvalidSignUp('lastname')}" required>
+          <span class="invalidText" *ngIf="isInvalidSignUp('lastname')">Enter last name</span>
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label class="text-color imp" for="signupUsername">Email</label>
+          <input type="email" id="signupUsername" formControlName="signupUsername" class="form-control" [ngClass]="{'invalid': isInvalidSignUp('signupUsername')}" required>
+          <span class="invalidText" *ngIf="isInvalidSignUp('signupUsername') && !signupForm.get('signupUsername')?.hasError('customError')">Enter valid email</span>
+          <span class="invalidText" *ngIf="signupForm.get('signupUsername')?.hasError('customError')">Email already exists.</span>
+
+        </div>
+        <div class="form-group col-12 col-md-6">
+          <label class="text-color imp" for="signupPassword">Password <i class="fa fa-question-circle-o" [matMenuTriggerFor]="menu"></i></label>
+          <div class="d-flex" style="position: relative;align-items: center;">
+            <input [type]="showPassword ? 'text':'password'" id="signupPassword" formControlName="signupPassword" class="form-control" [ngClass]="{'invalid': isInvalidSignUp('signupPassword')}" required>
+            <i class="text-color fa fa-eye" style="position: absolute; right: 5px;" *ngIf="showPassword" (click)="showPassword = false"></i>
+            <i class="text-color fa fa-eye-slash" style="position: absolute; right: 5px;" *ngIf="!showPassword" (click)="showPassword = true"></i>  
+          </div>
+          
+          <span class="invalidText" *ngIf="isInvalidSignUp('signupPassword')">Enter valid password</span>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-space-between" style="justify-content: space-between;  align-items: center;">
+        <button type="submit" class="btn btn-primary btn-bg" [disabled]="buttonDisable">Sign Up</button>
+        <a (click)="toggleForms('login')" >Login</a>
+      </div>
+    </form>
+  </div>
+  <mat-menu #menu="matMenu" panelClass="z-index">
+    <ul style="font-size: small; color: grey; margin-top: 5px;">
+      <li>Atleast 1 capital alphabet letter [A-Z]</li>
+      <li>Atleast 1 small alphabet letter [a-z]</li>
+      <li>Atleast 1 numeric [0-9] </li>
+      <li>Atleast 1 special character [!@#$%^&*()_+\-=\[\]&lcub;&rcub;;':"\\|,.&lt;&gt;\/?]</li>
+      <li>Minimum length should be 8</li>
+    </ul>
+  </mat-menu>
+</div>
+<div style="position: absolute; top: 10px; right: 10px;" *ngIf="signUpSuccess">
+  <div class="alert alert-success" role="alert">
+    Signup successful <a>Login</a> {{time}}s
+  </div>
+</div>
+</div>

@@ -1,0 +1,38 @@
+
+.item {
+  margin: 8px;
+  padding: 2px 10px;
+  border: 2px solid #79995abf;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.text-main {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.text-sub {
+  font-size: medium;
+}
+
+.br-50 {
+  border-radius: 50%;
+}
+.subTotal {
+  min-width: 110px;
+}
+.newPrice {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .oldPrice, .br-50 {
+    font-size: 12px;
+  }
+  .newPrice, .text-main {
+    font-size: 14px;
+  }
+}
