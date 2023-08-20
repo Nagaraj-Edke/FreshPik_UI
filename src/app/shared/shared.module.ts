@@ -3,27 +3,28 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule } from '@angular/forms';
-import { CheckoutBarComponent } from  './components/checkout-bar/checkout-bar.component'
-import {MatMenuModule} from '@angular/material/menu';
+import { CheckoutBarComponent } from './components/checkout-bar/checkout-bar.component'
+import { MatMenuModule } from '@angular/material/menu';
 import { CapitalizeFirstLetterPipe } from './capitalize-first-letter.pipe';
+import { PopupComponent } from './components/popup/popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
-
+const components = [
+  CardComponent, HeaderComponent, CheckoutBarComponent, PopupComponent
+];
 @NgModule({
   declarations: [
-    CardComponent,
-    HeaderComponent,
-    CheckoutBarComponent,
-    CapitalizeFirstLetterPipe
+    ...components,
+    CapitalizeFirstLetterPipe,
   ],
   imports: [
     CommonModule,
     FormsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   exports: [
-    CardComponent,
-    HeaderComponent,
-    CheckoutBarComponent
+    ...components
   ]
 })
 export class SharedModule { }

@@ -24,7 +24,6 @@ export class DbService {
     const items = localStorage.getItem('items')
     if(items) {
       ids = JSON.parse(items).reduce((acc: string[],item: any)=> {
-        console.log(acc)
         acc.push(item._id)
         return acc;
       }, [])
@@ -40,35 +39,26 @@ export class DbService {
     return this.http.post(`${this.baseAPI}login`, body)
   }
 
-  validateToken(token: string) {
-    const headers = new HttpHeaders({
-      'Authorization': token
-    });
-
-    return this.http.get(`${this.baseAPI}verify-token`,{headers})
+  validateToken() {
+    return this.http.get(`${this.baseAPI}verify-token`)
   }
 
-  getAddresses(token: string, userId?: number) {
-    const headers = new HttpHeaders({
-      'Authorization': token
-    });
-    return this.http.get(`${this.baseAPI}secured/getAddresses?userId=${userId}`,{headers})
+  getAddresses(userId?: number) {
+    return this.http.get(`${this.baseAPI}secured/getAddresses?userId=${userId}`)
   }
 
   addNewAddress(address: any, userId: number) {
-    const headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('token') || ''
-    });
     const addressId = address?.id
-    return this.http.post(`${this.baseAPI}secured/addNew${addressId ? '/'+addressId: ''}?userId=${userId}`, address, {headers});
+    return this.http.post(`${this.baseAPI}secured/addNew${addressId ? '/'+addressId: ''}?userId=${userId}`, address);
   }
 
   removeAddressById(userId: number, addressId: number) {
-    const headers = new HttpHeaders({
-      'Authorization': localStorage.getItem('token') || ''
-    });
+    return this.http.delete(`${this.baseAPI}secured/removeAddressById/${addressId}?userId=${userId}`);
 
-    return this.http.delete(`${this.baseAPI}secured/removeAddressById/${addressId}?userId=${userId}`,{headers});
+  }
+
+  getUserProfileData(userId: number = 4) {
+    return this.http.get(`${this.baseAPI}secured/userDetails?userId=${userId}`)
 
   }
 

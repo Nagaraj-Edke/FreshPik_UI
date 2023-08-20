@@ -19,6 +19,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: var(--color) !important;
     border: var(--color) Im !important;
   }
+  &:focus-visible {
+    background-color: #547634 !important;
+    border-color: #547634;
+    box-shadow: 0 0 0 0.25rem #54763488;
+  }
 }
 
 .btn-outline-bg {
@@ -40,7 +45,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   &:focus-visible {
     background-color: #547634;
     border-color: #547634;
-    box-shadow: 0 0 5px #547634;
+    box-shadow: 0 0 0 0.25rem #54763488;
   }
 }
 
@@ -82,8 +87,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 12px !important;
 }
 
-.backDrop {
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  cursor: not-allowed;
+.backDropClass {
+  backdrop-filter: blur(1px);
 }

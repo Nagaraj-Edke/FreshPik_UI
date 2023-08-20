@@ -1,4 +1,4 @@
-import { Component, HostListener, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DbService } from 'src/app/db.service';
 import { combineLatest } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,13 +10,11 @@ import { SharedService } from 'src/app/shared/shared.service';
   templateUrl: './compo.component.html',
   styleUrls: ['./compo.component.scss']
 })
-export class CompoComponent implements OnInit, OnChanges {
+export class CompoComponent implements OnInit {
   showFiller = true;
 
   constructor(private dbService: DbService, private activeRoute: ActivatedRoute, private router: Router, private sharedService: SharedService) { }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-  }
+
   panelOpenState = true;
   vegCheckbox = false;
   fruitsCheckbox = false;

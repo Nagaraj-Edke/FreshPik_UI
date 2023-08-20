@@ -37,14 +37,11 @@ export class PaymentComponent implements OnInit, OnDestroy {
       data: {
         totalAmount: this.totalAmount
       },
-      hasBackdrop: false,
-      enterAnimationDuration: '500ms',
+      enterAnimationDuration: '100ms',
       exitAnimationDuration: '100ms',
     });
-    document.body.classList.add('backDrop');
     this.dialogRef.afterClosed().subscribe((res: any) => {
       this.isPaymentProgress = false;
-      document.body.classList.remove('backDrop');
       if(res?.paymentSucess){
         this.router.navigate(['/'])
       }
@@ -57,7 +54,6 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    document.body.classList.remove('backDrop');
     this.dialogRef?.close();
   }
 

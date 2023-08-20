@@ -19,7 +19,6 @@ export class HeaderComponent {
   @ViewChild('input', { static: false }) input!: ElementRef;
 
   ngOnInit() {
-    // this.searchDOMmanipulation();
     this.sharedService.getSelctedItems().subscribe((res: any) => {
       this.cartCount = +res;
     });
@@ -62,10 +61,10 @@ export class HeaderComponent {
   }
 
   searchBarExpand() {
-    let search = document.querySelector('.search')?.classList.add('d-none');
-    let searchBox = document.querySelector('.searchBox')?.classList.add('active');
-    let cart = document.getElementById('cart')?.classList.add('d-none');
-    let userIcon = document.getElementById('userIcon')?.classList.add('d-none');
+    document.querySelector('.search')?.classList.add('d-none');
+    document.querySelector('.searchBox')?.classList.add('active');
+    document.getElementById('cart')?.classList.add('d-none');
+    document.getElementById('userIcon')?.classList.add('d-none');
   }
   searchBarCollapse() {
     document.querySelector('.searchBox')?.classList.remove('active')

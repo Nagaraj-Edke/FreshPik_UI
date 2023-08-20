@@ -1,0 +1,87 @@
+<div class="container">
+  <mat-accordion multi>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span class="text-color">Personal Information</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <section class="grid">
+        <span class="header">Username (Email):</span>
+        <span class="description">{{userDetails.username}} </span>
+        <span class="header">First Name:</span>
+        <span class="description" *ngIf="!edit">{{userDetails.firstname}} </span>
+        <span class="description" *ngIf="edit">
+          <input type="text" class="form-control" value="{{userDetails.firstname}}">
+        </span>
+        <span class="header">Last Name: </span>
+        <span class="description" *ngIf="!edit">{{userDetails.lastname}} </span>
+        <span class="description" *ngIf="edit">
+          <input type="text" class="form-control" value="{{userDetails.lastname}}">
+        </span>
+      </section>
+      <section class="d-flex flex-row-reverse">
+        <span (click)="editToggle()"><i class="fa fa-edit fa-2x text-color"></i></span>
+      </section>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span class="text-color">Manage Address</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <section class="address" *ngIf="userDetails?.address?.length">
+        <div *ngFor="let address of userDetails.address" class="my-1">
+          <span>{{address?.Hno}}, {{address?.street}}, {{address?.town}} - {{address.pincode}}</span>
+        </div>
+      </section>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <ng-container *ngIf="false; else form"></ng-container>
+
+  <ng-template #form>
+    <form [formGroup]="addressForm" (ngSubmit)="formSubmit()">
+      <div class="form-group flexRow">
+        <label>Name:</label>
+        <div class="d-flex flex-column">
+          <input type="text" class="form-control w-100" formControlName="name">
+          <span [ngClass]="isInvalid('name') ? 'invalidText' :'hidden'">Enter Name </span>
+        </div>
+      </div>
+      <div class="form-group flexRow">
+        <label>Hno/Flat No:</label>
+        <div class="d-flex flex-column">
+          <input type="text" class="form-control w-100" formControlName="Hno">
+          <span [ngClass]="isInvalid('Hno') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span>
+        </div>
+      </div>
+      <div class="form-group flexRow">
+        <label>Street: </label>
+        <div class="d-flex flex-column">
+          <input type="text" class="form-control w-100" formControlName="street">
+          <span [ngClass]="isInvalid('street') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span></div>
+        </div>
+        <div class="form-group flexRow">
+          <label>City/Town:</label>
+          <div class="d-flex flex-column">
+            <input type="text" class="form-control w-100" formControlName="town">
+            <span [ngClass]="isInvalid('town') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span>
+          </div>
+        </div>
+        <div class="form-group flexRow">
+          <label>Pincode: </label>
+          <div class="d-flex flex-column">
+            <input type="number" class="form-control w-100" formControlName="pincode">
+            <span [ngClass]="isInvalid('pincode') ? 'invalidText' :'hidden'">Enter Hno/Flat no</span>
+          </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+          <button type="submit" class="btn btn-primary btn-bg my-1">{{updateAddress ? 'Update ': 'Add'}} Address</button>
+          <button type="button" class="btn btn-outline-primary btn-outline-bg my-1 mx-2">Close</button>
+        </div>
+    </form>
+
+  </ng-template>
+</div>

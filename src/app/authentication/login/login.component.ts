@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
       }
       this.auth.login(body).subscribe({
         next: (res: any) => {
-          console.log(res)
           if (res.data.code === 2000) {
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
@@ -83,7 +82,6 @@ export class LoginComponent implements OnInit {
   onSignUpSubmit() {
     this.signupForm.markAllAsTouched();
     if (this.signupForm.valid) {
-      console.log('Sign-up form submitted', this.signupForm.value);
       const body = {
         firstname: this.signupForm.get('firstname')?.value,
         lastname: this.signupForm.get('lastname')?.value,
@@ -112,7 +110,6 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (err: HttpErrorResponse) => {
-          console.log(err);
           if (err.error.err.code === 3001 && err.status === 422) {
             this.signupForm.get('signupUsername')?.setErrors({ customError: true })
           }

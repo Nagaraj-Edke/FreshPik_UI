@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject} from 'rxjs'
+import { DbService } from '../db.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,9 @@ export class SharedService {
 
   private _isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn.asObservable();
+
+  private isLoggedInUser: boolean = false;
+
   constructor() {
     const data = localStorage.getItem('items');
     if(data){
@@ -56,37 +60,12 @@ export class SharedService {
     this._selectedItemsCount.next(this.itemCount);
     localStorage.setItem('items', JSON.stringify(this.savedItems));
   }
-/*
-    updateSavedItem(id: any, count?: number) {
-    let updated = false;
-    this.itemCount += 1;
-    for(let item of this.savedItems){
-      if(item._id === id){
-        item['count'] = item.count + 1;
-        updated = true;
-        break;
-      }
-    }
-    if(!updated){
-      const data = {
-        count : 1,
-        _id: id
-      }
-      this.savedItems.push(data);
-    }
-    this._selectedItemsCount.next(this.itemCount);
-    localStorage.setItem('items', JSON.stringify(this.savedItems));
-  }*/
-
 
   removeItem(id: string){
     for(let index in this.savedItems){
       if(this.savedItems[index]._id === id) {
         if(this.savedItems[index].count > 0){
           this.savedItems[index].count -= 1;
-          // if(this.savedItems[index].count === 0) {
-          //   this.savedItems.splice(+index, 1);
-          // }
         }
 
         this.itemCount -= 1;
@@ -113,6 +92,10 @@ export class SharedService {
   }
 
   changeLoginStatus(bool: boolean) {
+    this.isLoggedInUser = bool;
     this._isLoggedIn.next(bool);
+  }
+  isLoggedIn() {
+    return this.isLoggedInUser;
   }
 }

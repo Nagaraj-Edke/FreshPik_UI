@@ -1,0 +1,8 @@
+<h1 mat-dialog-title class="text-color">{{data.title}} <span class="ms-auto close" (click)="output()">X</span></h1>
+<div mat-dialog-content>
+  {{data.description}}
+</div>
+<div mat-dialog-actions align="end">
+  <button class="btn btn-outline-primary btn-outline-bg mx-1" (click)="output()">{{data.cancel}}</button>
+  <button class="btn btn-primary btn-bg mx-1" cdkFocusInitial (click)="output(data.ok)">{{data.ok}}</button>
+</div>

@@ -20,16 +20,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.selectedItemList = this.sharedService.getSelectedItemList();
   }
-  verify() {
-    // this.db.validSession(this.sessionId).subscribe({
-    //   next: (res: any)=>{
-    //     console.log(res)
-    //   },
-    //   error: (e) =>{
-    //     console.log(e)
-    //   }
-    // })
-  }
 
   isEmptyCart() {
     if(this.selectedItemList.length === 0) {

@@ -26,7 +26,7 @@
       <div class="d-flex justify-content-space-between" style="justify-content: space-between; align-items: center;">
         
         <button type="submit" class="btn btn-primary btn-bg" >Login</button>
-        <a (click)="toggleForms()">Sign Up</a>
+        <span><span class="font-12">New user? </span> <a (click)="toggleForms()">Sign Up</a></span>
       </div>
 
     </form>
@@ -68,7 +68,7 @@
 
       <div class="d-flex justify-content-space-between" style="justify-content: space-between;  align-items: center;">
         <button type="submit" class="btn btn-primary btn-bg" [disabled]="buttonDisable">Sign Up</button>
-        <a (click)="toggleForms('login')" >Login</a>
+        <span><span class="font-12">Already registered? </span> <a (click)="toggleForms('login')" >Login</a></span>
       </div>
     </form>
   </div>

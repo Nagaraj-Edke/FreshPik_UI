@@ -24,22 +24,18 @@ export class PayComponent {
   updateAddress = false;
   paymentPage: boolean = false;
   paymentStatus: boolean | string = false;
+  userId: number = 0;
 
   constructor(public dialogRef: MatDialogRef<PayComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder) {
     this.Price = +data.totalAmount;
   }
 
-  token: string = '';
-  userId: number = 0;
-
   ngOnInit() {
-    this.token = localStorage.getItem('token') || '';
     this.userId = JSON.parse(localStorage.getItem('user')!).userId
-    this.dbService.getAddresses(this.token, this.userId).subscribe({
+    this.dbService.getAddresses(this.userId).subscribe({
       next: (res: any) => {
         this.addresses = res.address;
-        console.log(res)
       },
       error: (err: any) => { console.log(err) }
     });
@@ -74,8 +70,7 @@ export class PayComponent {
           this.newAddressFrom.reset();
           this.newAddressFrom.enable();
         },
-        error: (e) =>{
-          console.log(e);
+        error: () =>{
           this.newAddressFrom.enable();
         }
       })
@@ -96,7 +91,6 @@ export class PayComponent {
       town: address.town || '',
       pincode: address.pincode || ''
     });
-    console.log(this.newAddressFrom.value)
   }
   AddNewAddress() {
     this.addNewAddress = true;
@@ -121,12 +115,7 @@ export class PayComponent {
   }
 
   remove(id: number) {
-    console.log(id);
-    this.dbService.removeAddressById(this.userId, id).subscribe((res)=>{
-      console.log(res);
-      
-    })
-    
+    this.dbService.removeAddressById(this.userId, id).subscribe();
   }
 
   PaymentSuccess() {
