@@ -24,6 +24,8 @@ export class CompoComponent implements OnInit {
   width = window.screen.width;
   mode: MatDrawerMode = 'side';
   filterSidebar: boolean = true;
+  arr: any[] = new Array(21);
+  cardsLoaded: boolean = false;
 
 
   @HostListener('window:resize', ['$event'])
@@ -45,6 +47,7 @@ export class CompoComponent implements OnInit {
       this.fruitsData = res[1];
       const type = res[2]?.type;
       const search = res[2]?.search;
+      this.cardsLoaded = true;
       this.data = this.sharedService.getUpdateList([...this.vegData, ...this.fruitsData])
       if (type === 'vegitables') {
         this.vegCheckbox = true;
@@ -68,8 +71,11 @@ export class CompoComponent implements OnInit {
     this.mode = width > 768 ? 'side' : 'over';
     if(width<769){
       this.filterSidebar = false;
+      const num = width > 425 ? 12 : 8;
+      this.arr = new Array(num);
     } else {
       this.filterSidebar = true;
+      this.arr = new Array(21);
     }
   }
 

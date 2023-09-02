@@ -26,7 +26,7 @@
 
 <div class="ms-3 mt-3">
   <h3 class="text-color ms-1">Fresh Vegitables</h3>
-  <div class="d-flex cards pb-4">
+  <div class="d-flex cards pb-4" *ngIf="dataLoaded; else cardsLoading">
     <div *ngFor="let veg of vegData">
       <app-card [veg]="veg"></app-card>
     </div>
@@ -44,7 +44,7 @@
 
 <div class="ms-3 mt-3">
   <h3 class="text-color ms-1">Fresh Fruits</h3>
-  <div class="d-flex cards pb-4">
+  <div class="d-flex cards pb-4" *ngIf="dataLoaded; else cardsLoading">
     <app-card *ngFor="let veg of fruits" [veg]="veg"></app-card>
     <div class="more" style="min-width: 10rem;">
       <div class="d-flex align-items-center" (click)="navigateToAll('fruits')">
@@ -57,4 +57,16 @@
   </div>
 </div>
 
-<!-- <app-checkout-bar></app-checkout-bar> -->
+<ng-template #cardsLoading>
+  <div class="d-flex overflow">
+    <ng-container *ngFor="let item of [1,2,3,4]">
+      <app-skeleton-loader [card]="true"></app-skeleton-loader>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #bannerLoading>
+  <div class="aspect-ratio-container">
+    <div class="content skeleton"></div>
+  </div>
+</ng-template>

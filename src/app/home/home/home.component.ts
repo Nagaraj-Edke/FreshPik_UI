@@ -37,13 +37,14 @@ export class HomeComponent {
       url: 'carosel6.png'
     }
   ];
-  
+  dataLoaded: boolean = false;
   ngOnInit() {
     const api1 = this.dbService.getData('vegitables', 4);
     const api2 = this.dbService.getData('fruits', 4);
     forkJoin([api1, api2]).subscribe((res: any) => {
-      this.vegData = this.sharedService.getUpdateList(res[0])
-      this.fruits = this.sharedService.getUpdateList(res[1])
+      this.vegData = this.sharedService.getUpdateList(res[0]);
+      this.fruits = this.sharedService.getUpdateList(res[1]);
+      this.dataLoaded = true;
     });
     this.sharedService.getSelctedItems().subscribe(()=>{
       this.vegData = this.sharedService.getUpdateList(this.vegData)

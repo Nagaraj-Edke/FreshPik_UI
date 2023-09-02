@@ -8,14 +8,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CapitalizeFirstLetterPipe } from './capitalize-first-letter.pipe';
 import { PopupComponent } from './components/popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 
 const components = [
-  CardComponent, HeaderComponent, CheckoutBarComponent, PopupComponent
+    CardComponent, HeaderComponent, CheckoutBarComponent, PopupComponent, SkeletonLoaderComponent
 ];
 @NgModule({
   declarations: [
     ...components,
-    CapitalizeFirstLetterPipe,
+    CapitalizeFirstLetterPipe
   ],
   imports: [
     CommonModule,

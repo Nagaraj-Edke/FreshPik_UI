@@ -1,0 +1,15 @@
+<ng-container *ngIf="cardLoading">
+  <div class="card m-1">
+    <div class="img skeleton"></div>
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title mt-auto skeleton"></h5>
+      <p class="text skeleton"></p> 
+      <p class="text skeleton"></p>
+  
+      <div class="d-flex">
+        <button type="button" class="btn btn-outline-primary btn-outline-bg add w-100" disabled>
+          Add <i class="fa fa-cart-plus"></i></button>
+      </div>
+    </div>
+  </div>
+</ng-container>

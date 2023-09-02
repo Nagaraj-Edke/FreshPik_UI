@@ -37,6 +37,9 @@
         <p *ngIf="isLoggedIn" mat-menu-item>
           <span>{{name}}</span>
         </p>
+        <p *ngIf="isLoggedIn" mat-menu-item (click)="navigate('/profile')">
+          <span>Profile</span>
+        </p>
       </mat-menu>
     </div>
   </div>
