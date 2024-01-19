@@ -7,7 +7,7 @@ import { SharedService } from './shared/shared.service';
 })
 export class DbService {
 
-  baseAPI: string = 'http://localhost:3000/'
+  baseAPI: string = 'https://freshpik.onrender.com/'
   constructor(private http: HttpClient) { }
   sharedService = inject(SharedService)
 

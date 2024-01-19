@@ -40,7 +40,8 @@ export class SharedService {
 
   resetSelectedItemList() {
     this.savedItems = [];
-    this._selectedItemsCount.next(0)
+    this._selectedItemsCount.next(0);
+    this.itemCount = 0;
   }
 
   updateSavedItem(data: any, count?: number) {
